@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ContasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Contas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Classificacao" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empresas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeFantasia" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RazaoSocial" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lancamentos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdEmpresa" Type="int" Nullable="false" />
+    <Property Name="IdConta" Type="int" Nullable="false" />
+    <Property Name="Data" Type="date" Nullable="false" />
+    <Property Name="Valor" Type="money" Nullable="false" />
+    <Property Name="IdContaDebito" Type="int" Nullable="false" />
+    <Property Name="IdContaCredito" Type="int" Nullable="false" />
+    <Property Name="Historico" Type="varchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Lancamentos_IdConta">
+    <End Role="Contas" Type="Self.Contas" Multiplicity="1" />
+    <End Role="Lancamentos" Type="Self.Lancamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lancamentos">
+        <PropertyRef Name="IdConta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Lancamentos_IdContaCredito">
+    <End Role="Contas" Type="Self.Contas" Multiplicity="1" />
+    <End Role="Lancamentos" Type="Self.Lancamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lancamentos">
+        <PropertyRef Name="IdContaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Lancamentos_IdContaDebito">
+    <End Role="Contas" Type="Self.Contas" Multiplicity="1" />
+    <End Role="Lancamentos" Type="Self.Lancamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lancamentos">
+        <PropertyRef Name="IdContaDebito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Lancamentos_IdEmpresa">
+    <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+    <End Role="Lancamentos" Type="Self.Lancamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lancamentos">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_ContaAlterar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idconta" Type="int" Mode="In" />
+    <Parameter Name="codigo" Type="varchar" Mode="In" />
+    <Parameter Name="nome" Type="varchar" Mode="In" />
+    <Parameter Name="classificacao" Type="varchar" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ContaBuscar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idconta" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ContaExcluir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idconta" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ContaInserir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="varchar" Mode="In" />
+    <Parameter Name="nome" Type="varchar" Mode="In" />
+    <Parameter Name="classificacao" Type="varchar" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ContasListarTodas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_EmpresaAlterar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idempresa" Type="int" Mode="In" />
+    <Parameter Name="nomefantasia" Type="varchar" Mode="In" />
+    <Parameter Name="razaosocial" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_EmpresaBuscar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idempresa" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_EmpresaExcluir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idempresa" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_EmpresaInserir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nomefantasia" Type="varchar" Mode="In" />
+    <Parameter Name="razaosocial" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_EmpresasListarTodas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_LancamentoAlterar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idlancamento" Type="int" Mode="In" />
+    <Parameter Name="data" Type="date" Mode="In" />
+    <Parameter Name="valor" Type="money" Mode="In" />
+    <Parameter Name="idcontadebito" Type="int" Mode="In" />
+    <Parameter Name="idcontacredito" Type="int" Mode="In" />
+    <Parameter Name="historico" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_LancamentoBuscar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idlancamento" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_LancamentoExcluir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idlancamento" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_LancamentoInserir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idempresa" Type="int" Mode="In" />
+    <Parameter Name="idconta" Type="int" Mode="In" />
+    <Parameter Name="data" Type="date" Mode="In" />
+    <Parameter Name="valor" Type="money" Mode="In" />
+    <Parameter Name="idcontadebito" Type="int" Mode="In" />
+    <Parameter Name="idcontacredito" Type="int" Mode="In" />
+    <Parameter Name="historico" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_LancamentosListarPorEmpresaEPorData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idempresa" Type="int" Mode="In" />
+    <Parameter Name="dataanterior" Type="date" Mode="In" />
+    <Parameter Name="dataposterior" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="ContasModelStoreContainer">
+    <EntitySet Name="Contas" EntityType="Self.Contas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lancamentos" EntityType="Self.Lancamentos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Lancamentos_IdConta" Association="Self.fk_Lancamentos_IdConta">
+      <End Role="Contas" EntitySet="Contas" />
+      <End Role="Lancamentos" EntitySet="Lancamentos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Lancamentos_IdContaCredito" Association="Self.fk_Lancamentos_IdContaCredito">
+      <End Role="Contas" EntitySet="Contas" />
+      <End Role="Lancamentos" EntitySet="Lancamentos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Lancamentos_IdContaDebito" Association="Self.fk_Lancamentos_IdContaDebito">
+      <End Role="Contas" EntitySet="Contas" />
+      <End Role="Lancamentos" EntitySet="Lancamentos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Lancamentos_IdEmpresa" Association="Self.fk_Lancamentos_IdEmpresa">
+      <End Role="Empresas" EntitySet="Empresas" />
+      <End Role="Lancamentos" EntitySet="Lancamentos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
