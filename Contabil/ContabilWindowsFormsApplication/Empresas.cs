@@ -17,14 +17,13 @@ namespace ContabilWindowsFormsApplication
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Empresas()
         {
-            this.Lancamentos = new HashSet<Lancamentos>();
+            this.PlanoDeContas = new HashSet<PlanoDeContas>();
         }
     
         public int Id { get; set; }
-        public string NomeFantasia { get; set; }
         public string RazaoSocial { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lancamentos> Lancamentos { get; set; }
+        public virtual ICollection<PlanoDeContas> PlanoDeContas { get; set; }
     }
 }

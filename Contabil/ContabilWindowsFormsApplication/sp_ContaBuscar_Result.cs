@@ -16,7 +16,13 @@ namespace ContabilWindowsFormsApplication
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Nome { get; set; }
-        public string Classificacao { get; set; }
-        public string Tipo { get; set; }
+        public bool AtivoContaSintetica { get; set; }
+        public bool AtivoContaAnalitica { get; set; }
+        public bool PassivoContaSintetica { get; set; }
+        public bool PassivoContaAnalitica { get; set; }
+        public bool ReceitaContaSintetica { get; set; }
+        public bool ReceitaContaAnalitica { get; set; }
+        public bool DespesaContaSintetica { get; set; }
+        public bool DespesaContaAnalitica { get; set; }
     }
 }

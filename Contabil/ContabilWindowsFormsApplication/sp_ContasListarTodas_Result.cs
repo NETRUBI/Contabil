@@ -13,10 +13,8 @@ namespace ContabilWindowsFormsApplication
     
     public partial class sp_ContasListarTodas_Result
     {
-        public int Id { get; set; }
         public string Codigo { get; set; }
         public string Nome { get; set; }
-        public string Classificacao { get; set; }
-        public string Tipo { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -12,20 +12,20 @@ namespace ContabilWindowsFormsApplication
     using System;
     using System.Collections.Generic;
     
-    public partial class Lancamentos
+    public partial class PlanoDeContas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PlanoDeContas()
+        {
+            this.PlanoDeContasDetalhes = new HashSet<PlanoDeContasDetalhes>();
+        }
+    
         public int Id { get; set; }
         public int IdEmpresa { get; set; }
-        public int IdConta { get; set; }
-        public System.DateTime Data { get; set; }
-        public decimal Valor { get; set; }
-        public string Historico { get; set; }
-        public int IdContaDebito { get; set; }
-        public int IdContaCredito { get; set; }
+        public System.DateTime MesDoPlano { get; set; }
     
-        public virtual Contas Contas { get; set; }
         public virtual Empresas Empresas { get; set; }
-        public virtual Contas Contas1 { get; set; }
-        public virtual Contas Contas11 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlanoDeContasDetalhes> PlanoDeContasDetalhes { get; set; }
     }
 }

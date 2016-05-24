@@ -10,11 +10,16 @@
 namespace ContabilWindowsFormsApplication
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_EmpresasListar_Result
+    public partial class PlanoDeContasDetalhes
     {
         public int Id { get; set; }
-        public string NomeFantasia { get; set; }
-        public string RazaoSocial { get; set; }
+        public int IdPlanoDeContas { get; set; }
+        public int IdConta { get; set; }
+        public string Classificacao { get; set; }
+    
+        public virtual Contas Contas { get; set; }
+        public virtual PlanoDeContas PlanoDeContas { get; set; }
     }
 }

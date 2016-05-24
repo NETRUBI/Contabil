@@ -1,121 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ContasModelStoreContainer" CdmEntityContainer="ContabilEntities">
-    <FunctionImportMapping FunctionImportName="sp_ContaAlterar" FunctionName="ContasModel.Store.sp_ContaAlterar" />
-    <FunctionImportMapping FunctionImportName="sp_ContaBuscar" FunctionName="ContasModel.Store.sp_ContaBuscar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ContasModel.sp_ContaBuscar_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Nome" ColumnName="Nome" />
-          <ScalarProperty Name="Classificacao" ColumnName="Classificacao" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_ContaExcluir" FunctionName="ContasModel.Store.sp_ContaExcluir" />
-    <FunctionImportMapping FunctionImportName="sp_ContaInserir" FunctionName="ContasModel.Store.sp_ContaInserir" />
-    <FunctionImportMapping FunctionImportName="sp_EmpresaAlterar" FunctionName="ContasModel.Store.sp_EmpresaAlterar" />
-    <FunctionImportMapping FunctionImportName="sp_EmpresaBuscar" FunctionName="ContasModel.Store.sp_EmpresaBuscar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ContasModel.sp_EmpresaBuscar_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
-          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_EmpresaExcluir" FunctionName="ContasModel.Store.sp_EmpresaExcluir" />
-    <FunctionImportMapping FunctionImportName="sp_EmpresaInserir" FunctionName="ContasModel.Store.sp_EmpresaInserir" />
-    <FunctionImportMapping FunctionImportName="sp_LancamentoExcluir" FunctionName="ContasModel.Store.sp_LancamentoExcluir" />
-    <FunctionImportMapping FunctionImportName="sp_LancamentoInserir" FunctionName="ContasModel.Store.sp_LancamentoInserir" />
+  <EntityContainerMapping StorageEntityContainer="ContabilModelStoreContainer" CdmEntityContainer="ContabilEntities">
     <EntitySetMapping Name="Contas">
-      <EntityTypeMapping TypeName="ContasModel.Contas">
+      <EntityTypeMapping TypeName="ContabilModel.Contas">
         <MappingFragment StoreEntitySet="Contas">
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="Classificacao" ColumnName="Classificacao" />
-          <ScalarProperty Name="Nome" ColumnName="Nome" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="AtivoContaSintetica" ColumnName="AtivoContaSintetica" />
+          <ScalarProperty Name="AtivoContaAnalitica" ColumnName="AtivoContaAnalitica" />
+          <ScalarProperty Name="PassivoContaSintetica" ColumnName="PassivoContaSintetica" />
+          <ScalarProperty Name="PassivoContaAnalitica" ColumnName="PassivoContaAnalitica" />
+          <ScalarProperty Name="ReceitaContaSintetica" ColumnName="ReceitaContaSintetica" />
+          <ScalarProperty Name="ReceitaContaAnalitica" ColumnName="ReceitaContaAnalitica" />
+          <ScalarProperty Name="DespesaContaSintetica" ColumnName="DespesaContaSintetica" />
+          <ScalarProperty Name="DespesaContaAnalitica" ColumnName="DespesaContaAnalitica" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Empresas">
-      <EntityTypeMapping TypeName="ContasModel.Empresas">
+      <EntityTypeMapping TypeName="ContabilModel.Empresas">
         <MappingFragment StoreEntitySet="Empresas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
-          <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Lancamentos">
-      <EntityTypeMapping TypeName="ContasModel.Lancamentos">
-        <MappingFragment StoreEntitySet="Lancamentos">
-          <ScalarProperty Name="IdContaCredito" ColumnName="IdContaCredito" />
-          <ScalarProperty Name="IdContaDebito" ColumnName="IdContaDebito" />
-          <ScalarProperty Name="Historico" ColumnName="Historico" />
-          <ScalarProperty Name="Valor" ColumnName="Valor" />
-          <ScalarProperty Name="Data" ColumnName="Data" />
-          <ScalarProperty Name="IdConta" ColumnName="IdConta" />
+    <EntitySetMapping Name="PlanoDeContas">
+      <EntityTypeMapping TypeName="ContabilModel.PlanoDeContas">
+        <MappingFragment StoreEntitySet="PlanoDeContas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MesDoPlano" ColumnName="MesDoPlano" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_ContasListarTodas" FunctionName="ContasModel.Store.sp_ContasListarTodas">
+    <EntitySetMapping Name="PlanoDeContasDetalhes">
+      <EntityTypeMapping TypeName="ContabilModel.PlanoDeContasDetalhes">
+        <MappingFragment StoreEntitySet="PlanoDeContasDetalhes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdPlanoDeContas" ColumnName="IdPlanoDeContas" />
+          <ScalarProperty Name="IdConta" ColumnName="IdConta" />
+          <ScalarProperty Name="Classificacao" ColumnName="Classificacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_AtivoCadastrarContaAnalitica" FunctionName="ContabilModel.Store.sp_AtivoCadastrarContaAnalitica" />
+    <FunctionImportMapping FunctionImportName="sp_AtivoCadastrarContaSintetica" FunctionName="ContabilModel.Store.sp_AtivoCadastrarContaSintetica" />
+    <FunctionImportMapping FunctionImportName="sp_ContasListarTodas" FunctionName="ContabilModel.Store.sp_ContasListarTodas">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="ContasModel.sp_ContasListarTodas_Result">
+        <ComplexTypeMapping TypeName="ContabilModel.sp_ContasListarTodas_Result">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_DespesaCadastrarContaAnalitica" FunctionName="ContabilModel.Store.sp_DespesaCadastrarContaAnalitica" />
+    <FunctionImportMapping FunctionImportName="sp_DespesaCadastrarContaSintetica" FunctionName="ContabilModel.Store.sp_DespesaCadastrarContaSintetica" />
+    <FunctionImportMapping FunctionImportName="sp_EmpresaAlterar" FunctionName="ContabilModel.Store.sp_EmpresaAlterar" />
+    <FunctionImportMapping FunctionImportName="sp_EmpresaBuscar" FunctionName="ContabilModel.Store.sp_EmpresaBuscar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ContabilModel.sp_EmpresaBuscar_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_EmpresaCadastrar" FunctionName="ContabilModel.Store.sp_EmpresaCadastrar" />
+    <FunctionImportMapping FunctionImportName="sp_EmpresasListarTodas" FunctionName="ContabilModel.Store.sp_EmpresasListarTodas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ContabilModel.sp_EmpresasListarTodas_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_PassivoCadastrarContaAnalitica" FunctionName="ContabilModel.Store.sp_PassivoCadastrarContaAnalitica" />
+    <FunctionImportMapping FunctionImportName="sp_PassivoCadastrarContaSintetica" FunctionName="ContabilModel.Store.sp_PassivoCadastrarContaSintetica" />
+    <FunctionImportMapping FunctionImportName="sp_PlanoDeContasAdicionarConta" FunctionName="ContabilModel.Store.sp_PlanoDeContasAdicionarConta" />
+    <FunctionImportMapping FunctionImportName="sp_PlanoDeContasCriarNovoPlano" FunctionName="ContabilModel.Store.sp_PlanoDeContasCriarNovoPlano" />
+    <FunctionImportMapping FunctionImportName="sp_PlanoDeContasRemoverConta" FunctionName="ContabilModel.Store.sp_PlanoDeContasRemoverConta" />
+    <FunctionImportMapping FunctionImportName="sp_PlanosDeContasListarTodosPlanosDaEmpresa" FunctionName="ContabilModel.Store.sp_PlanosDeContasListarTodosPlanosDaEmpresa">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ContabilModel.sp_PlanosDeContasListarTodosPlanosDaEmpresa_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MesDoPlano" ColumnName="MesDoPlano" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ReceitaCadastrarContaAnalitica" FunctionName="ContabilModel.Store.sp_ReceitaCadastrarContaAnalitica" />
+    <FunctionImportMapping FunctionImportName="sp_ReceitaCadastrarContaSintetica" FunctionName="ContabilModel.Store.sp_ReceitaCadastrarContaSintetica" />
+    <FunctionImportMapping FunctionImportName="sp_ContaBuscar" FunctionName="ContabilModel.Store.sp_ContaBuscar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ContabilModel.sp_ContaBuscar_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="AtivoContaSintetica" ColumnName="AtivoContaSintetica" />
+          <ScalarProperty Name="AtivoContaAnalitica" ColumnName="AtivoContaAnalitica" />
+          <ScalarProperty Name="PassivoContaSintetica" ColumnName="PassivoContaSintetica" />
+          <ScalarProperty Name="PassivoContaAnalitica" ColumnName="PassivoContaAnalitica" />
+          <ScalarProperty Name="ReceitaContaSintetica" ColumnName="ReceitaContaSintetica" />
+          <ScalarProperty Name="ReceitaContaAnalitica" ColumnName="ReceitaContaAnalitica" />
+          <ScalarProperty Name="DespesaContaSintetica" ColumnName="DespesaContaSintetica" />
+          <ScalarProperty Name="DespesaContaAnalitica" ColumnName="DespesaContaAnalitica" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_PlanoDeContasListarContasDoPlano" FunctionName="ContabilModel.Store.sp_PlanoDeContasListarContasDoPlano">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ContabilModel.sp_PlanoDeContasListarContasDoPlano_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Classificacao" ColumnName="Classificacao" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_EmpresasListarTodas" FunctionName="ContasModel.Store.sp_EmpresasListarTodas">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ContasModel.sp_EmpresasListarTodas_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
-          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_LancamentosListarPorEmpresaEPorData" FunctionName="ContasModel.Store.sp_LancamentosListarPorEmpresaEPorData">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ContasModel.sp_LancamentosListarPorEmpresaEPorData_Result">
-          <ScalarProperty Name="IdLancamento" ColumnName="IdLancamento" />
           <ScalarProperty Name="IdConta" ColumnName="IdConta" />
-          <ScalarProperty Name="CodigoContaLançamento" ColumnName="CodigoContaLançamento" />
-          <ScalarProperty Name="ValorContaLançamento" ColumnName="ValorContaLançamento" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="IdContaDebito" ColumnName="IdContaDebito" />
-          <ScalarProperty Name="CodigoContaDebito" ColumnName="CodigoContaDebito" />
-          <ScalarProperty Name="IdContaCredito" ColumnName="IdContaCredito" />
-          <ScalarProperty Name="CodigoContaCredito" ColumnName="CodigoContaCredito" />
-          <ScalarProperty Name="Historico" ColumnName="Historico" />
-          <ScalarProperty Name="DataLançamento" ColumnName="DataLançamento" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_LancamentoAlterar" FunctionName="ContasModel.Store.sp_LancamentoAlterar" />
-    <FunctionImportMapping FunctionImportName="sp_LancamentoBuscar" FunctionName="ContasModel.Store.sp_LancamentoBuscar">
+    <FunctionImportMapping FunctionImportName="sp_PlanoDeContasListarContasForaDoPlano" FunctionName="ContabilModel.Store.sp_PlanoDeContasListarContasForaDoPlano">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="ContasModel.sp_LancamentoBuscar_Result">
+        <ComplexTypeMapping TypeName="ContabilModel.sp_PlanoDeContasListarContasForaDoPlano_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-          <ScalarProperty Name="IdConta" ColumnName="IdConta" />
-          <ScalarProperty Name="Data" ColumnName="Data" />
-          <ScalarProperty Name="Valor" ColumnName="Valor" />
-          <ScalarProperty Name="IdContaDebito" ColumnName="IdContaDebito" />
-          <ScalarProperty Name="IdContaCredito" ColumnName="IdContaCredito" />
-          <ScalarProperty Name="Historico" ColumnName="Historico" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
-          <ScalarProperty Name="Classificacao" ColumnName="Classificacao" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

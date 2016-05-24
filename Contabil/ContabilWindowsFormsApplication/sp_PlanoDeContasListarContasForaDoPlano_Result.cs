@@ -11,20 +11,9 @@ namespace ContabilWindowsFormsApplication
 {
     using System;
     
-    public partial class sp_LancamentosListar_Result
+    public partial class sp_PlanoDeContasListarContasForaDoPlano_Result
     {
         public int Id { get; set; }
-        public int IdEmpresa { get; set; }
-        public int IdConta { get; set; }
-        public System.DateTime Data { get; set; }
-        public decimal Valor { get; set; }
-        public string Debito { get; set; }
-        public string Credito { get; set; }
-        public string Historico { get; set; }
-        public int Id1 { get; set; }
-        public string Codigo { get; set; }
         public string Nome { get; set; }
-        public string Classificacao { get; set; }
-        public string Tipo { get; set; }
     }
 }

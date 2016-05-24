@@ -17,22 +17,22 @@ namespace ContabilWindowsFormsApplication
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Contas()
         {
-            this.Lancamentos = new HashSet<Lancamentos>();
-            this.Lancamentos1 = new HashSet<Lancamentos>();
-            this.Lancamentos11 = new HashSet<Lancamentos>();
+            this.PlanoDeContasDetalhes = new HashSet<PlanoDeContasDetalhes>();
         }
     
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Nome { get; set; }
-        public string Classificacao { get; set; }
-        public string Tipo { get; set; }
+        public bool AtivoContaSintetica { get; set; }
+        public bool AtivoContaAnalitica { get; set; }
+        public bool PassivoContaSintetica { get; set; }
+        public bool PassivoContaAnalitica { get; set; }
+        public bool ReceitaContaSintetica { get; set; }
+        public bool ReceitaContaAnalitica { get; set; }
+        public bool DespesaContaSintetica { get; set; }
+        public bool DespesaContaAnalitica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lancamentos> Lancamentos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lancamentos> Lancamentos1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lancamentos> Lancamentos11 { get; set; }
+        public virtual ICollection<PlanoDeContasDetalhes> PlanoDeContasDetalhes { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ContabilWindowsFormsApplication.Forms;
 
 namespace ContabilWindowsFormsApplication
 {
@@ -27,125 +28,81 @@ namespace ContabilWindowsFormsApplication
             else
                 this.WindowState = FormWindowState.Maximized;
         }
-       
-        /// <summary>
-        /// Funcionando perfeitamente
-        /// </summary>
-        private void EmpresasCadastrarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void empresasListarToolStripMenuItem8_Click(object sender, EventArgs e)
         {
             byte i = 0;
-
             foreach (Form form in this.MdiChildren)
             {
                 i += 1;
             }
-
             if (i == 0)
             {
-                FormEmpresaCadastrarAlterar formCadastrarAlterarEmpresa = new FormEmpresaCadastrarAlterar(0) { MdiParent = this };
-                formCadastrarAlterarEmpresa.Show();
+                EmpresasListar empresasListar = new EmpresasListar() { MdiParent = this };
+                empresasListar.Show();
             }
             else
                 MessageBox.Show("Para abrir outros formulários, feche o formulário atual.");
         }
-        
-        /// <summary>
-        /// Funcionando perfeitamente
-        /// </summary>
-        private void EmpresasListarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void empresaCadastrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             byte i = 0;
-
             foreach (Form form in this.MdiChildren)
             {
                 i += 1;
             }
-
             if (i == 0)
             {
-                FormEmpresasListar formEmpresasListar = new FormEmpresasListar() { MdiParent = this };
-                formEmpresasListar.Show();
+                EmpresaCadastrarAlterar empresaCadastrarAlterar = new EmpresaCadastrarAlterar() { MdiParent = this };
+                empresaCadastrarAlterar.Show();
             }
             else
                 MessageBox.Show("Para abrir outros formulários, feche o formulário atual.");
+
         }
-        
-        /// <summary>
-        /// Funcionando perfeitamente
-        /// </summary>
-        private void ContasCadastrarToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void contasListarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             byte i = 0;
-
             foreach (Form form in this.MdiChildren)
             {
                 i += 1;
             }
-
             if (i == 0)
             {
-                FormContaCadastrarAlterar formContaCadastrarAlterar = new FormContaCadastrarAlterar() { MdiParent = this };
-                formContaCadastrarAlterar.Show();
+                ContasListar contasListar = new ContasListar() { MdiParent = this };
+                contasListar.Show();
             }
             else
                 MessageBox.Show("Para abrir outros formulários, feche o formulário atual.");
-        }
 
-        /// <summary>
-        /// Funcionando perfeitamente
-        /// </summary>
-        private void ContasListarToolStripMenuItem1_Click(object sender, EventArgs e)
+        }
+        private void contaCadastrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             byte i = 0;
-
             foreach (Form form in this.MdiChildren)
             {
                 i += 1;
             }
-
             if (i == 0)
             {
-                FormContasListar formContasListar = new FormContasListar() { MdiParent = this };
-                formContasListar.Show();
+                ContaCadastrarAlterar contaCadastrarAlterar = new ContaCadastrarAlterar() { MdiParent = this };
+                contaCadastrarAlterar.Show();
             }
             else
                 MessageBox.Show("Para abrir outros formulários, feche o formulário atual.");
         }
 
-        /// <summary>
-        /// Funcionando perfeitamente
-        /// </summary>
-        private void LancamentosListarToolStripMenuItem3_Click(object sender, EventArgs e) 
+        private void planoDeContasListarTodosAnterioresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             byte i = 0;
-
             foreach (Form form in this.MdiChildren)
             {
                 i += 1;
             }
-
             if (i == 0)
             {
-                FormLancamentosListar formLancamentosListar = new FormLancamentosListar() { MdiParent = this };
-                formLancamentosListar.Show();
-            }
-            else
-                MessageBox.Show("Para abrir outros formulários, feche o formulário atual.");
-        }
-
-        private void cadastrarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            byte i = 0;
-
-            foreach (Form form in this.MdiChildren)
-            {
-                i += 1;
-            }
-
-            if (i == 0)
-            {
-                FormLancamentosCadastrarAlterar formLancamentosCadastrarAlterar = new FormLancamentosCadastrarAlterar() { MdiParent = this };
-                formLancamentosCadastrarAlterar.Show();
+                PlanoDeContasListarPlanos planoDeContasListar = new PlanoDeContasListarPlanos() { MdiParent = this };
+                planoDeContasListar.Show();
             }
             else
                 MessageBox.Show("Para abrir outros formulários, feche o formulário atual.");

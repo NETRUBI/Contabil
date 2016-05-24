@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="84ab8a87515d43b1ba325805d1b37ca5" Name="Diagram1" ZoomLevel="83">
-        <EntityTypeShape EntityType="ContasModel.Contas" Width="1.5" PointX="8.375" PointY="3.375" />
-        <EntityTypeShape EntityType="ContasModel.Empresas" Width="1.5" PointX="8.375" PointY="1.375" />
-        <EntityTypeShape EntityType="ContasModel.Lancamentos" Width="1.5" PointX="5.75" PointY="1.75" />
-        <AssociationConnector Association="ContasModel.fk_Lancamentos_IdConta" />
-        <AssociationConnector Association="ContasModel.fk_Lancamentos_IdEmpresa" />
-        <AssociationConnector Association="ContasModel.fk_Lancamentos_IdContaDebito" />
-        <AssociationConnector Association="ContasModel.fk_Lancamentos_IdContaCredito" />
-        </Diagram>
+      <Diagram DiagramId="03d24ce5acfc4269b05a57bbfae5f33d" Name="Diagram1">
+        <EntityTypeShape EntityType="ContabilModel.Contas" Width="1.5" PointX="7.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContabilModel.Empresas" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContabilModel.PlanoDeContas" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContabilModel.PlanoDeContasDetalhes" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="ContabilModel.FK_PlanoDeContasDetalhes_Contas" ManuallyRouted="false" />
+        <AssociationConnector Association="ContabilModel.FK_PlanoDeContas_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="ContabilModel.FK_PlanoDeContasDetalhes_PlanoDeContas" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

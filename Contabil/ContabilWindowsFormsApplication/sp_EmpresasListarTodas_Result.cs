@@ -13,8 +13,7 @@ namespace ContabilWindowsFormsApplication
     
     public partial class sp_EmpresasListarTodas_Result
     {
-        public int Id { get; set; }
-        public string NomeFantasia { get; set; }
+        public int ID { get; set; }
         public string RazaoSocial { get; set; }
     }
 }

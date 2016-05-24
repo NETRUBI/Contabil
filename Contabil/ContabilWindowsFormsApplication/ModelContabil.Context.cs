@@ -29,52 +29,10 @@ namespace ContabilWindowsFormsApplication
     
         public virtual DbSet<Contas> Contas { get; set; }
         public virtual DbSet<Empresas> Empresas { get; set; }
-        public virtual DbSet<Lancamentos> Lancamentos { get; set; }
+        public virtual DbSet<PlanoDeContas> PlanoDeContas { get; set; }
+        public virtual DbSet<PlanoDeContasDetalhes> PlanoDeContasDetalhes { get; set; }
     
-        public virtual int sp_ContaAlterar(Nullable<int> idconta, string codigo, string nome, string classificacao, string tipo)
-        {
-            var idcontaParameter = idconta.HasValue ?
-                new ObjectParameter("idconta", idconta) :
-                new ObjectParameter("idconta", typeof(int));
-    
-            var codigoParameter = codigo != null ?
-                new ObjectParameter("codigo", codigo) :
-                new ObjectParameter("codigo", typeof(string));
-    
-            var nomeParameter = nome != null ?
-                new ObjectParameter("nome", nome) :
-                new ObjectParameter("nome", typeof(string));
-    
-            var classificacaoParameter = classificacao != null ?
-                new ObjectParameter("classificacao", classificacao) :
-                new ObjectParameter("classificacao", typeof(string));
-    
-            var tipoParameter = tipo != null ?
-                new ObjectParameter("tipo", tipo) :
-                new ObjectParameter("tipo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ContaAlterar", idcontaParameter, codigoParameter, nomeParameter, classificacaoParameter, tipoParameter);
-        }
-    
-        public virtual ObjectResult<sp_ContaBuscar_Result> sp_ContaBuscar(Nullable<int> idconta)
-        {
-            var idcontaParameter = idconta.HasValue ?
-                new ObjectParameter("idconta", idconta) :
-                new ObjectParameter("idconta", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ContaBuscar_Result>("sp_ContaBuscar", idcontaParameter);
-        }
-    
-        public virtual int sp_ContaExcluir(Nullable<int> idconta)
-        {
-            var idcontaParameter = idconta.HasValue ?
-                new ObjectParameter("idconta", idconta) :
-                new ObjectParameter("idconta", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ContaExcluir", idcontaParameter);
-        }
-    
-        public virtual int sp_ContaInserir(string codigo, string nome, string classificacao, string tipo)
+        public virtual int sp_AtivoCadastrarContaAnalitica(string codigo, string nome)
         {
             var codigoParameter = codigo != null ?
                 new ObjectParameter("codigo", codigo) :
@@ -84,115 +42,20 @@ namespace ContabilWindowsFormsApplication
                 new ObjectParameter("nome", nome) :
                 new ObjectParameter("nome", typeof(string));
     
-            var classificacaoParameter = classificacao != null ?
-                new ObjectParameter("classificacao", classificacao) :
-                new ObjectParameter("classificacao", typeof(string));
-    
-            var tipoParameter = tipo != null ?
-                new ObjectParameter("tipo", tipo) :
-                new ObjectParameter("tipo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ContaInserir", codigoParameter, nomeParameter, classificacaoParameter, tipoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AtivoCadastrarContaAnalitica", codigoParameter, nomeParameter);
         }
     
-        public virtual int sp_ContasListar()
+        public virtual int sp_AtivoCadastrarContaSintetica(string codigo, string nome)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ContasListar");
-        }
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
     
-        public virtual int sp_EmpresaAlterar(Nullable<int> idempresa, string nomefantasia, string razaosocial)
-        {
-            var idempresaParameter = idempresa.HasValue ?
-                new ObjectParameter("idempresa", idempresa) :
-                new ObjectParameter("idempresa", typeof(int));
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
     
-            var nomefantasiaParameter = nomefantasia != null ?
-                new ObjectParameter("nomefantasia", nomefantasia) :
-                new ObjectParameter("nomefantasia", typeof(string));
-    
-            var razaosocialParameter = razaosocial != null ?
-                new ObjectParameter("razaosocial", razaosocial) :
-                new ObjectParameter("razaosocial", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EmpresaAlterar", idempresaParameter, nomefantasiaParameter, razaosocialParameter);
-        }
-    
-        public virtual ObjectResult<sp_EmpresaBuscar_Result> sp_EmpresaBuscar(Nullable<int> idempresa)
-        {
-            var idempresaParameter = idempresa.HasValue ?
-                new ObjectParameter("idempresa", idempresa) :
-                new ObjectParameter("idempresa", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_EmpresaBuscar_Result>("sp_EmpresaBuscar", idempresaParameter);
-        }
-    
-        public virtual int sp_EmpresaExcluir(Nullable<int> idempresa)
-        {
-            var idempresaParameter = idempresa.HasValue ?
-                new ObjectParameter("idempresa", idempresa) :
-                new ObjectParameter("idempresa", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EmpresaExcluir", idempresaParameter);
-        }
-    
-        public virtual int sp_EmpresaInserir(string nomefantasia, string razaosocial)
-        {
-            var nomefantasiaParameter = nomefantasia != null ?
-                new ObjectParameter("nomefantasia", nomefantasia) :
-                new ObjectParameter("nomefantasia", typeof(string));
-    
-            var razaosocialParameter = razaosocial != null ?
-                new ObjectParameter("razaosocial", razaosocial) :
-                new ObjectParameter("razaosocial", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EmpresaInserir", nomefantasiaParameter, razaosocialParameter);
-        }
-    
-        public virtual ObjectResult<sp_EmpresasListar_Result> sp_EmpresasListar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_EmpresasListar_Result>("sp_EmpresasListar");
-        }
-    
-        public virtual int sp_LancamentoExcluir(Nullable<int> idlancamento)
-        {
-            var idlancamentoParameter = idlancamento.HasValue ?
-                new ObjectParameter("idlancamento", idlancamento) :
-                new ObjectParameter("idlancamento", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LancamentoExcluir", idlancamentoParameter);
-        }
-    
-        public virtual int sp_LancamentoInserir(Nullable<int> idempresa, Nullable<int> idconta, Nullable<System.DateTime> data, Nullable<decimal> valor, Nullable<int> idcontadebito, Nullable<int> idcontacredito, string historico)
-        {
-            var idempresaParameter = idempresa.HasValue ?
-                new ObjectParameter("idempresa", idempresa) :
-                new ObjectParameter("idempresa", typeof(int));
-    
-            var idcontaParameter = idconta.HasValue ?
-                new ObjectParameter("idconta", idconta) :
-                new ObjectParameter("idconta", typeof(int));
-    
-            var dataParameter = data.HasValue ?
-                new ObjectParameter("data", data) :
-                new ObjectParameter("data", typeof(System.DateTime));
-    
-            var valorParameter = valor.HasValue ?
-                new ObjectParameter("valor", valor) :
-                new ObjectParameter("valor", typeof(decimal));
-    
-            var idcontadebitoParameter = idcontadebito.HasValue ?
-                new ObjectParameter("idcontadebito", idcontadebito) :
-                new ObjectParameter("idcontadebito", typeof(int));
-    
-            var idcontacreditoParameter = idcontacredito.HasValue ?
-                new ObjectParameter("idcontacredito", idcontacredito) :
-                new ObjectParameter("idcontacredito", typeof(int));
-    
-            var historicoParameter = historico != null ?
-                new ObjectParameter("historico", historico) :
-                new ObjectParameter("historico", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LancamentoInserir", idempresaParameter, idcontaParameter, dataParameter, valorParameter, idcontadebitoParameter, idcontacreditoParameter, historicoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AtivoCadastrarContaSintetica", codigoParameter, nomeParameter);
         }
     
         public virtual ObjectResult<sp_ContasListarTodas_Result> sp_ContasListarTodas()
@@ -200,64 +63,193 @@ namespace ContabilWindowsFormsApplication
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ContasListarTodas_Result>("sp_ContasListarTodas");
         }
     
+        public virtual int sp_DespesaCadastrarContaAnalitica(string codigo, string nome)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DespesaCadastrarContaAnalitica", codigoParameter, nomeParameter);
+        }
+    
+        public virtual int sp_DespesaCadastrarContaSintetica(string codigo, string nome)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DespesaCadastrarContaSintetica", codigoParameter, nomeParameter);
+        }
+    
+        public virtual int sp_EmpresaAlterar(Nullable<int> id, string razaoSocial)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var razaoSocialParameter = razaoSocial != null ?
+                new ObjectParameter("razaoSocial", razaoSocial) :
+                new ObjectParameter("razaoSocial", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EmpresaAlterar", idParameter, razaoSocialParameter);
+        }
+    
+        public virtual ObjectResult<sp_EmpresaBuscar_Result> sp_EmpresaBuscar(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_EmpresaBuscar_Result>("sp_EmpresaBuscar", idParameter);
+        }
+    
+        public virtual int sp_EmpresaCadastrar(string razaoSocial)
+        {
+            var razaoSocialParameter = razaoSocial != null ?
+                new ObjectParameter("razaoSocial", razaoSocial) :
+                new ObjectParameter("razaoSocial", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EmpresaCadastrar", razaoSocialParameter);
+        }
+    
         public virtual ObjectResult<sp_EmpresasListarTodas_Result> sp_EmpresasListarTodas()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_EmpresasListarTodas_Result>("sp_EmpresasListarTodas");
         }
     
-        public virtual ObjectResult<sp_LancamentosListarPorEmpresaEPorData_Result> sp_LancamentosListarPorEmpresaEPorData(Nullable<int> idempresa, Nullable<System.DateTime> dataanterior, Nullable<System.DateTime> dataposterior)
+        public virtual int sp_PassivoCadastrarContaAnalitica(string codigo, string nome)
         {
-            var idempresaParameter = idempresa.HasValue ?
-                new ObjectParameter("idempresa", idempresa) :
-                new ObjectParameter("idempresa", typeof(int));
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
     
-            var dataanteriorParameter = dataanterior.HasValue ?
-                new ObjectParameter("dataanterior", dataanterior) :
-                new ObjectParameter("dataanterior", typeof(System.DateTime));
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
     
-            var dataposteriorParameter = dataposterior.HasValue ?
-                new ObjectParameter("dataposterior", dataposterior) :
-                new ObjectParameter("dataposterior", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LancamentosListarPorEmpresaEPorData_Result>("sp_LancamentosListarPorEmpresaEPorData", idempresaParameter, dataanteriorParameter, dataposteriorParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PassivoCadastrarContaAnalitica", codigoParameter, nomeParameter);
         }
     
-        public virtual int sp_LancamentoAlterar(Nullable<int> idlancamento, Nullable<System.DateTime> data, Nullable<decimal> valor, Nullable<int> idcontadebito, Nullable<int> idcontacredito, string historico)
+        public virtual int sp_PassivoCadastrarContaSintetica(string codigo, string nome)
         {
-            var idlancamentoParameter = idlancamento.HasValue ?
-                new ObjectParameter("idlancamento", idlancamento) :
-                new ObjectParameter("idlancamento", typeof(int));
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
     
-            var dataParameter = data.HasValue ?
-                new ObjectParameter("data", data) :
-                new ObjectParameter("data", typeof(System.DateTime));
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
     
-            var valorParameter = valor.HasValue ?
-                new ObjectParameter("valor", valor) :
-                new ObjectParameter("valor", typeof(decimal));
-    
-            var idcontadebitoParameter = idcontadebito.HasValue ?
-                new ObjectParameter("idcontadebito", idcontadebito) :
-                new ObjectParameter("idcontadebito", typeof(int));
-    
-            var idcontacreditoParameter = idcontacredito.HasValue ?
-                new ObjectParameter("idcontacredito", idcontacredito) :
-                new ObjectParameter("idcontacredito", typeof(int));
-    
-            var historicoParameter = historico != null ?
-                new ObjectParameter("historico", historico) :
-                new ObjectParameter("historico", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LancamentoAlterar", idlancamentoParameter, dataParameter, valorParameter, idcontadebitoParameter, idcontacreditoParameter, historicoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PassivoCadastrarContaSintetica", codigoParameter, nomeParameter);
         }
     
-        public virtual ObjectResult<sp_LancamentoBuscar_Result> sp_LancamentoBuscar(Nullable<int> idlancamento)
+        public virtual int sp_PlanoDeContasAdicionarConta(Nullable<int> idPlanoDeContas, Nullable<int> idConta, string classificacao)
         {
-            var idlancamentoParameter = idlancamento.HasValue ?
-                new ObjectParameter("idlancamento", idlancamento) :
-                new ObjectParameter("idlancamento", typeof(int));
+            var idPlanoDeContasParameter = idPlanoDeContas.HasValue ?
+                new ObjectParameter("idPlanoDeContas", idPlanoDeContas) :
+                new ObjectParameter("idPlanoDeContas", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LancamentoBuscar_Result>("sp_LancamentoBuscar", idlancamentoParameter);
+            var idContaParameter = idConta.HasValue ?
+                new ObjectParameter("idConta", idConta) :
+                new ObjectParameter("idConta", typeof(int));
+    
+            var classificacaoParameter = classificacao != null ?
+                new ObjectParameter("classificacao", classificacao) :
+                new ObjectParameter("classificacao", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PlanoDeContasAdicionarConta", idPlanoDeContasParameter, idContaParameter, classificacaoParameter);
+        }
+    
+        public virtual int sp_PlanoDeContasCriarNovoPlano(Nullable<int> idEmpresa, string mesDoPlano)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("idEmpresa", idEmpresa) :
+                new ObjectParameter("idEmpresa", typeof(int));
+    
+            var mesDoPlanoParameter = mesDoPlano != null ?
+                new ObjectParameter("mesDoPlano", mesDoPlano) :
+                new ObjectParameter("mesDoPlano", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PlanoDeContasCriarNovoPlano", idEmpresaParameter, mesDoPlanoParameter);
+        }
+    
+        public virtual int sp_PlanoDeContasRemoverConta(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PlanoDeContasRemoverConta", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_PlanosDeContasListarTodosPlanosDaEmpresa_Result> sp_PlanosDeContasListarTodosPlanosDaEmpresa(Nullable<int> idEmpresa)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("idEmpresa", idEmpresa) :
+                new ObjectParameter("idEmpresa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_PlanosDeContasListarTodosPlanosDaEmpresa_Result>("sp_PlanosDeContasListarTodosPlanosDaEmpresa", idEmpresaParameter);
+        }
+    
+        public virtual int sp_ReceitaCadastrarContaAnalitica(string codigo, string nome)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ReceitaCadastrarContaAnalitica", codigoParameter, nomeParameter);
+        }
+    
+        public virtual int sp_ReceitaCadastrarContaSintetica(string codigo, string nome)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ReceitaCadastrarContaSintetica", codigoParameter, nomeParameter);
+        }
+    
+        public virtual ObjectResult<sp_ContaBuscar_Result> sp_ContaBuscar(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ContaBuscar_Result>("sp_ContaBuscar", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_PlanoDeContasListarContasDoPlano_Result> sp_PlanoDeContasListarContasDoPlano(Nullable<int> idPlanoDeContas)
+        {
+            var idPlanoDeContasParameter = idPlanoDeContas.HasValue ?
+                new ObjectParameter("idPlanoDeContas", idPlanoDeContas) :
+                new ObjectParameter("idPlanoDeContas", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_PlanoDeContasListarContasDoPlano_Result>("sp_PlanoDeContasListarContasDoPlano", idPlanoDeContasParameter);
+        }
+    
+        public virtual ObjectResult<sp_PlanoDeContasListarContasForaDoPlano_Result> sp_PlanoDeContasListarContasForaDoPlano(Nullable<int> idPlanoDeContas)
+        {
+            var idPlanoDeContasParameter = idPlanoDeContas.HasValue ?
+                new ObjectParameter("idPlanoDeContas", idPlanoDeContas) :
+                new ObjectParameter("idPlanoDeContas", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_PlanoDeContasListarContasForaDoPlano_Result>("sp_PlanoDeContasListarContasForaDoPlano", idPlanoDeContasParameter);
         }
     }
 }

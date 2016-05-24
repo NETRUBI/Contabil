@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,50 +78,59 @@
     <Compile Include="Empresas.cs">
       <DependentUpon>ModelContabil.tt</DependentUpon>
     </Compile>
-    <Compile Include="FormContaCadastrarAlterar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormContaCadastrarAlterar.Designer.cs">
-      <DependentUpon>FormContaCadastrarAlterar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormContasListar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormContasListar.Designer.cs">
-      <DependentUpon>FormContasListar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormEmpresaCadastrarAlterar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEmpresaCadastrarAlterar.Designer.cs">
-      <DependentUpon>FormEmpresaCadastrarAlterar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormEmpresasListar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEmpresasListar.Designer.cs">
-      <DependentUpon>FormEmpresasListar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormLancamentosCadastrarAlterar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormLancamentosCadastrarAlterar.Designer.cs">
-      <DependentUpon>FormLancamentosCadastrarAlterar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormLancamentosListar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormLancamentosListar.Designer.cs">
-      <DependentUpon>FormLancamentosListar.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPrincipal.Designer.cs">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lancamentos.cs">
-      <DependentUpon>ModelContabil.tt</DependentUpon>
+    <Compile Include="Forms\ContaCadastrarAlterar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContaCadastrarAlterar.Designer.cs">
+      <DependentUpon>ContaCadastrarAlterar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ContasListar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContasListar.Designer.cs">
+      <DependentUpon>ContasListar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmpresaCadastrarAlterar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmpresaCadastrarAlterar.Designer.cs">
+      <DependentUpon>EmpresaCadastrarAlterar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmpresasListar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmpresasListar.Designer.cs">
+      <DependentUpon>EmpresasListar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasAbrirPlano.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasAbrirPlano.Designer.cs">
+      <DependentUpon>PlanoDeContasAbrirPlano.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasAdicionarConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasAdicionarConta.Designer.cs">
+      <DependentUpon>PlanoDeContasAdicionarConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasCriarNovoPlano.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasCriarNovoPlano.Designer.cs">
+      <DependentUpon>PlanoDeContasCriarNovoPlano.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasListarPlanos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlanoDeContasListarPlanos.Designer.cs">
+      <DependentUpon>PlanoDeContasListarPlanos.cs</DependentUpon>
     </Compile>
     <Compile Include="ModelContabil.Context.cs">
       <AutoGen>True</AutoGen>
@@ -123,6 +147,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelContabil.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PlanoDeContas.cs">
+      <DependentUpon>ModelContabil.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlanoDeContasDetalhes.cs">
+      <DependentUpon>ModelContabil.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sp_ContaBuscar_Result.cs">
@@ -137,72 +167,66 @@
     <Compile Include="sp_EmpresasListarTodas_Result.cs">
       <DependentUpon>ModelContabil.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_EmpresasListar_Result.cs">
+    <Compile Include="sp_PlanoDeContasListarContasDoPlano_Result.cs">
       <DependentUpon>ModelContabil.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_LancamentoBuscar_Result.cs">
+    <Compile Include="sp_PlanoDeContasListarContasForaDoPlano_Result.cs">
       <DependentUpon>ModelContabil.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_LancamentosListarPorEmpresaEPorData_Result.cs">
+    <Compile Include="sp_PlanosDeContasListarTodosPlanosDaEmpresa_Result.cs">
       <DependentUpon>ModelContabil.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_LancamentosListar_Result.cs">
-      <DependentUpon>ModelContabil.tt</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="FormContaCadastrarAlterar.resx">
-      <DependentUpon>FormContaCadastrarAlterar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormContasListar.resx">
-      <DependentUpon>FormContasListar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormEmpresaCadastrarAlterar.resx">
-      <DependentUpon>FormEmpresaCadastrarAlterar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormEmpresasListar.resx">
-      <DependentUpon>FormEmpresasListar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormLancamentosCadastrarAlterar.resx">
-      <DependentUpon>FormLancamentosCadastrarAlterar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormLancamentosListar.resx">
-      <DependentUpon>FormLancamentosListar.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Forms\ContaCadastrarAlterar.resx">
+      <DependentUpon>ContaCadastrarAlterar.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Forms\ContasListar.resx">
+      <DependentUpon>ContasListar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmpresaCadastrarAlterar.resx">
+      <DependentUpon>EmpresaCadastrarAlterar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmpresasListar.resx">
+      <DependentUpon>EmpresasListar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlanoDeContasAbrirPlano.resx">
+      <DependentUpon>PlanoDeContasAbrirPlano.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlanoDeContasAdicionarConta.resx">
+      <DependentUpon>PlanoDeContasAdicionarConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlanoDeContasCriarNovoPlano.resx">
+      <DependentUpon>PlanoDeContasCriarNovoPlano.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlanoDeContasListarPlanos.resx">
+      <DependentUpon>PlanoDeContasListarPlanos.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.Config" />
     <EntityDeploy Include="ModelContabil.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelContabil.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="ModelContabil.edmx.diagram">
       <DependentUpon>ModelContabil.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\sp_ContaBuscar_Result.datasource" />
-    <None Include="Properties\DataSources\sp_ContasListarTodas_Result.datasource" />
-    <None Include="Properties\DataSources\sp_EmpresasListarTodas_Result.datasource" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModelContabil.Context.tt">

@@ -11,9 +11,9 @@ namespace ContabilWindowsFormsApplication
 {
     using System;
     
-    public partial class sp_EmpresaBuscar_Result
+    public partial class sp_PlanosDeContasListarTodosPlanosDaEmpresa_Result
     {
         public int Id { get; set; }
-        public string RazaoSocial { get; set; }
+        public string MesDoPlano { get; set; }
     }
 }

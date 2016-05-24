@@ -1,248 +1,212 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ContasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="ContabilEntities" annotation:LazyLoadingEnabled="true">
-    <FunctionImport Name="sp_ContaAlterar">
-      <Parameter Name="idconta" Mode="In" Type="Int32" />
-      <Parameter Name="codigo" Mode="In" Type="String" />
-      <Parameter Name="nome" Mode="In" Type="String" />
-      <Parameter Name="classificacao" Mode="In" Type="String" />
-      <Parameter Name="tipo" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_ContaBuscar" ReturnType="Collection(ContasModel.sp_ContaBuscar_Result)">
-      <Parameter Name="idconta" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_ContaExcluir">
-      <Parameter Name="idconta" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_ContaInserir">
-      <Parameter Name="codigo" Mode="In" Type="String" />
-      <Parameter Name="nome" Mode="In" Type="String" />
-      <Parameter Name="classificacao" Mode="In" Type="String" />
-      <Parameter Name="tipo" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_ContasListar" />
-    <FunctionImport Name="sp_EmpresaAlterar">
-      <Parameter Name="idempresa" Mode="In" Type="Int32" />
-      <Parameter Name="nomefantasia" Mode="In" Type="String" />
-      <Parameter Name="razaosocial" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_EmpresaBuscar" ReturnType="Collection(ContasModel.sp_EmpresaBuscar_Result)">
-      <Parameter Name="idempresa" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_EmpresaExcluir">
-      <Parameter Name="idempresa" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_EmpresaInserir">
-      <Parameter Name="nomefantasia" Mode="In" Type="String" />
-      <Parameter Name="razaosocial" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_EmpresasListar" ReturnType="Collection(ContasModel.sp_EmpresasListar_Result)" />
-    <FunctionImport Name="sp_LancamentoExcluir">
-      <Parameter Name="idlancamento" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_LancamentoInserir">
-      <Parameter Name="idempresa" Mode="In" Type="Int32" />
-      <Parameter Name="idconta" Mode="In" Type="Int32" />
-      <Parameter Name="data" Mode="In" Type="DateTime" />
-      <Parameter Name="valor" Mode="In" Type="Decimal" />
-      <Parameter Name="idcontadebito" Mode="In" Type="Int32" />
-      <Parameter Name="idcontacredito" Mode="In" Type="Int32" />
-      <Parameter Name="historico" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="Contas" EntityType="ContasModel.Contas" />
-    <EntitySet Name="Empresas" EntityType="ContasModel.Empresas" />
-    <EntitySet Name="Lancamentos" EntityType="ContasModel.Lancamentos" />
-    <AssociationSet Name="fk_Lancamentos_IdConta" Association="ContasModel.fk_Lancamentos_IdConta">
-      <End Role="Contas" EntitySet="Contas" />
-      <End Role="Lancamentos" EntitySet="Lancamentos" />
-    </AssociationSet>
-    <AssociationSet Name="fk_Lancamentos_IdEmpresa" Association="ContasModel.fk_Lancamentos_IdEmpresa">
-      <End Role="Empresas" EntitySet="Empresas" />
-      <End Role="Lancamentos" EntitySet="Lancamentos" />
-    </AssociationSet>
-    <AssociationSet Name="fk_Lancamentos_IdContaDebito" Association="ContasModel.fk_Lancamentos_IdContaDebito">
-      <End Role="Contas" EntitySet="Contas" />
-      <End Role="Lancamentos" EntitySet="Lancamentos" />
-    </AssociationSet>
-    <AssociationSet Name="fk_Lancamentos_IdContaCredito" Association="ContasModel.fk_Lancamentos_IdContaCredito">
-      <End Role="Contas" EntitySet="Contas" />
-      <End Role="Lancamentos" EntitySet="Lancamentos" />
-    </AssociationSet>
-    <FunctionImport Name="sp_ContasListarTodas" ReturnType="Collection(ContasModel.sp_ContasListarTodas_Result)" />
-    <FunctionImport Name="sp_EmpresasListarTodas" ReturnType="Collection(ContasModel.sp_EmpresasListarTodas_Result)" />
-    <FunctionImport Name="sp_LancamentosListarPorEmpresaEPorData" ReturnType="Collection(ContasModel.sp_LancamentosListarPorEmpresaEPorData_Result)">
-      <Parameter Name="idempresa" Mode="In" Type="Int32" />
-      <Parameter Name="dataanterior" Mode="In" Type="DateTime" />
-      <Parameter Name="dataposterior" Mode="In" Type="DateTime" />
-    </FunctionImport>
-    <FunctionImport Name="sp_LancamentoAlterar">
-      <Parameter Name="idlancamento" Mode="In" Type="Int32" />
-      <Parameter Name="data" Mode="In" Type="DateTime" />
-      <Parameter Name="valor" Mode="In" Type="Decimal" />
-      <Parameter Name="idcontadebito" Mode="In" Type="Int32" />
-      <Parameter Name="idcontacredito" Mode="In" Type="Int32" />
-      <Parameter Name="historico" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_LancamentoBuscar" ReturnType="Collection(ContasModel.sp_LancamentoBuscar_Result)">
-      <Parameter Name="idlancamento" Mode="In" Type="Int32" />
-    </FunctionImport>
-  </EntityContainer>
-  <ComplexType Name="sp_ContaBuscar_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="Codigo" Nullable="false" MaxLength="16" />
-    <Property Type="String" Name="Nome" Nullable="false" MaxLength="40" />
-    <Property Type="String" Name="Classificacao" Nullable="false" MaxLength="25" />
-    <Property Type="String" Name="Tipo" Nullable="true" MaxLength="1" />
-  </ComplexType>
-  <ComplexType Name="sp_EmpresaBuscar_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="NomeFantasia" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="RazaoSocial" Nullable="false" MaxLength="100" />
-  </ComplexType>
-  <ComplexType Name="sp_EmpresasListar_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="NomeFantasia" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="RazaoSocial" Nullable="false" MaxLength="100" />
-  </ComplexType>
-  <ComplexType Name="sp_LancamentosListar_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-    <Property Type="Int32" Name="IdConta" Nullable="false" />
-    <Property Type="DateTime" Name="Data" Nullable="false" Precision="23" />
-    <Property Type="Decimal" Name="Valor" Nullable="false" Precision="19" />
-    <Property Type="String" Name="Debito" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Credito" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Historico" Nullable="false" MaxLength="60" />
-    <Property Type="Int32" Name="Id1" Nullable="false" />
-    <Property Type="String" Name="Codigo" Nullable="false" MaxLength="16" />
-    <Property Type="String" Name="Nome" Nullable="false" MaxLength="40" />
-    <Property Type="String" Name="Classificacao" Nullable="false" MaxLength="25" />
-    <Property Type="String" Name="Tipo" Nullable="true" MaxLength="1" />
-  </ComplexType>
+<Schema Namespace="ContabilModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Contas">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="Nome" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="Classificacao" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Lancamentos" Relationship="ContasModel.fk_Lancamentos_IdConta" FromRole="Contas" ToRole="Lancamentos" />
-    <NavigationProperty Name="Lancamentos1" Relationship="ContasModel.fk_Lancamentos_IdContaDebito" FromRole="Contas" ToRole="Lancamentos" />
-    <NavigationProperty Name="Lancamentos11" Relationship="ContasModel.fk_Lancamentos_IdContaCredito" FromRole="Contas" ToRole="Lancamentos" />
+    <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AtivoContaSintetica" Type="Boolean" Nullable="false" />
+    <Property Name="AtivoContaAnalitica" Type="Boolean" Nullable="false" />
+    <Property Name="PassivoContaSintetica" Type="Boolean" Nullable="false" />
+    <Property Name="PassivoContaAnalitica" Type="Boolean" Nullable="false" />
+    <Property Name="ReceitaContaSintetica" Type="Boolean" Nullable="false" />
+    <Property Name="ReceitaContaAnalitica" Type="Boolean" Nullable="false" />
+    <Property Name="DespesaContaSintetica" Type="Boolean" Nullable="false" />
+    <Property Name="DespesaContaAnalitica" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PlanoDeContasDetalhes" Relationship="Self.FK_PlanoDeContasDetalhes_Contas" FromRole="Contas" ToRole="PlanoDeContasDetalhes" />
   </EntityType>
   <EntityType Name="Empresas">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NomeFantasia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="RazaoSocial" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Lancamentos" Relationship="ContasModel.fk_Lancamentos_IdEmpresa" FromRole="Empresas" ToRole="Lancamentos" />
+    <Property Name="RazaoSocial" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PlanoDeContas" Relationship="Self.FK_PlanoDeContas_Empresas" FromRole="Empresas" ToRole="PlanoDeContas" />
   </EntityType>
-  <EntityType Name="Lancamentos">
+  <EntityType Name="PlanoDeContas">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-    <Property Name="IdConta" Type="Int32" Nullable="false" />
-    <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Valor" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-    <Property Name="Historico" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Contas" Relationship="ContasModel.fk_Lancamentos_IdConta" FromRole="Lancamentos" ToRole="Contas" />
-    <NavigationProperty Name="Empresas" Relationship="ContasModel.fk_Lancamentos_IdEmpresa" FromRole="Lancamentos" ToRole="Empresas" />
-    <Property Name="IdContaDebito" Type="Int32" Nullable="false" />
-    <Property Name="IdContaCredito" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Contas1" Relationship="ContasModel.fk_Lancamentos_IdContaDebito" FromRole="Lancamentos" ToRole="Contas" />
-    <NavigationProperty Name="Contas11" Relationship="ContasModel.fk_Lancamentos_IdContaCredito" FromRole="Lancamentos" ToRole="Contas" />
+    <Property Name="MesDoPlano" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Empresas" Relationship="Self.FK_PlanoDeContas_Empresas" FromRole="PlanoDeContas" ToRole="Empresas" />
+    <NavigationProperty Name="PlanoDeContasDetalhes" Relationship="Self.FK_PlanoDeContasDetalhes_PlanoDeContas" FromRole="PlanoDeContas" ToRole="PlanoDeContasDetalhes" />
   </EntityType>
-  <Association Name="fk_Lancamentos_IdConta">
-    <End Type="ContasModel.Contas" Role="Contas" Multiplicity="1" />
-    <End Type="ContasModel.Lancamentos" Role="Lancamentos" Multiplicity="*" />
+  <EntityType Name="PlanoDeContasDetalhes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPlanoDeContas" Type="Int32" Nullable="false" />
+    <Property Name="IdConta" Type="Int32" Nullable="false" />
+    <Property Name="Classificacao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Contas" Relationship="Self.FK_PlanoDeContasDetalhes_Contas" FromRole="PlanoDeContasDetalhes" ToRole="Contas" />
+    <NavigationProperty Name="PlanoDeContas" Relationship="Self.FK_PlanoDeContasDetalhes_PlanoDeContas" FromRole="PlanoDeContasDetalhes" ToRole="PlanoDeContas" />
+  </EntityType>
+  <Association Name="FK_PlanoDeContasDetalhes_Contas">
+    <End Role="Contas" Type="Self.Contas" Multiplicity="1" />
+    <End Role="PlanoDeContasDetalhes" Type="Self.PlanoDeContasDetalhes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Contas">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Lancamentos">
+      <Dependent Role="PlanoDeContasDetalhes">
         <PropertyRef Name="IdConta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_Lancamentos_IdEmpresa">
-    <End Type="ContasModel.Empresas" Role="Empresas" Multiplicity="1" />
-    <End Type="ContasModel.Lancamentos" Role="Lancamentos" Multiplicity="*" />
+  <Association Name="FK_PlanoDeContas_Empresas">
+    <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+    <End Role="PlanoDeContas" Type="Self.PlanoDeContas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Empresas">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Lancamentos">
+      <Dependent Role="PlanoDeContas">
         <PropertyRef Name="IdEmpresa" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_Lancamentos_IdContaDebito">
-    <End Type="ContasModel.Contas" Role="Contas" Multiplicity="1" />
-    <End Type="ContasModel.Lancamentos" Role="Lancamentos" Multiplicity="*" />
+  <Association Name="FK_PlanoDeContasDetalhes_PlanoDeContas">
+    <End Role="PlanoDeContas" Type="Self.PlanoDeContas" Multiplicity="1" />
+    <End Role="PlanoDeContasDetalhes" Type="Self.PlanoDeContasDetalhes" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Contas">
+      <Principal Role="PlanoDeContas">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Lancamentos">
-        <PropertyRef Name="IdContaDebito" />
+      <Dependent Role="PlanoDeContasDetalhes">
+        <PropertyRef Name="IdPlanoDeContas" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_Lancamentos_IdContaCredito">
-    <End Type="ContasModel.Contas" Role="Contas" Multiplicity="1" />
-    <End Type="ContasModel.Lancamentos" Role="Lancamentos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Contas">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Lancamentos">
-        <PropertyRef Name="IdContaCredito" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityContainer Name="ContabilEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Contas" EntityType="Self.Contas" />
+    <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+    <EntitySet Name="PlanoDeContas" EntityType="Self.PlanoDeContas" />
+    <EntitySet Name="PlanoDeContasDetalhes" EntityType="Self.PlanoDeContasDetalhes" />
+    <AssociationSet Name="FK_PlanoDeContasDetalhes_Contas" Association="Self.FK_PlanoDeContasDetalhes_Contas">
+      <End Role="Contas" EntitySet="Contas" />
+      <End Role="PlanoDeContasDetalhes" EntitySet="PlanoDeContasDetalhes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlanoDeContas_Empresas" Association="Self.FK_PlanoDeContas_Empresas">
+      <End Role="Empresas" EntitySet="Empresas" />
+      <End Role="PlanoDeContas" EntitySet="PlanoDeContas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlanoDeContasDetalhes_PlanoDeContas" Association="Self.FK_PlanoDeContasDetalhes_PlanoDeContas">
+      <End Role="PlanoDeContas" EntitySet="PlanoDeContas" />
+      <End Role="PlanoDeContasDetalhes" EntitySet="PlanoDeContasDetalhes" />
+    </AssociationSet>
+    <FunctionImport Name="sp_AtivoCadastrarContaAnalitica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AtivoCadastrarContaSintetica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ContasListarTodas" ReturnType="Collection(ContabilModel.sp_ContasListarTodas_Result)" />
+    <FunctionImport Name="sp_DespesaCadastrarContaAnalitica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DespesaCadastrarContaSintetica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_EmpresaAlterar">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="razaoSocial" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_EmpresaBuscar" ReturnType="Collection(ContabilModel.sp_EmpresaBuscar_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_EmpresaCadastrar">
+      <Parameter Name="razaoSocial" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_EmpresasListarTodas" ReturnType="Collection(ContabilModel.sp_EmpresasListarTodas_Result)" />
+    <FunctionImport Name="sp_PassivoCadastrarContaAnalitica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PassivoCadastrarContaSintetica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PlanoDeContasAdicionarConta">
+      <Parameter Name="idPlanoDeContas" Mode="In" Type="Int32" />
+      <Parameter Name="idConta" Mode="In" Type="Int32" />
+      <Parameter Name="classificacao" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PlanoDeContasCriarNovoPlano">
+      <Parameter Name="idEmpresa" Mode="In" Type="Int32" />
+      <Parameter Name="mesDoPlano" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PlanoDeContasRemoverConta">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PlanosDeContasListarTodosPlanosDaEmpresa" ReturnType="Collection(ContabilModel.sp_PlanosDeContasListarTodosPlanosDaEmpresa_Result)">
+      <Parameter Name="idEmpresa" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ReceitaCadastrarContaAnalitica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ReceitaCadastrarContaSintetica">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="nome" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ContaBuscar" ReturnType="Collection(ContabilModel.sp_ContaBuscar_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PlanoDeContasListarContasDoPlano" ReturnType="Collection(ContabilModel.sp_PlanoDeContasListarContasDoPlano_Result)">
+      <Parameter Name="idPlanoDeContas" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PlanoDeContasListarContasForaDoPlano" ReturnType="Collection(ContabilModel.sp_PlanoDeContasListarContasForaDoPlano_Result)">
+      <Parameter Name="idPlanoDeContas" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
   <ComplexType Name="sp_ContasListarTodas_Result">
+    <Property Type="String" Name="Codigo" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Nome" Nullable="false" MaxLength="100" />
     <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="Codigo" Nullable="false" MaxLength="16" />
-    <Property Type="String" Name="Nome" Nullable="false" MaxLength="40" />
-    <Property Type="String" Name="Classificacao" Nullable="false" MaxLength="25" />
-    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="sp_EmpresaBuscar_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="RazaoSocial" Nullable="false" MaxLength="70" />
   </ComplexType>
   <ComplexType Name="sp_EmpresasListarTodas_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="NomeFantasia" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="RazaoSocial" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="RazaoSocial" Nullable="false" MaxLength="70" />
   </ComplexType>
-  <ComplexType Name="sp_LancamentosListarPorEmpresaEPorData_Result">
-    <Property Type="Int32" Name="IdLancamento" Nullable="false" />
-    <Property Type="Int32" Name="IdConta" Nullable="false" />
-    <Property Type="String" Name="CodigoContaLançamento" Nullable="false" MaxLength="16" />
-    <Property Type="Decimal" Name="ValorContaLançamento" Nullable="false" Precision="19" />
-    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" />
-    <Property Type="Int32" Name="IdContaDebito" Nullable="false" />
-    <Property Type="String" Name="CodigoContaDebito" Nullable="true" MaxLength="16" />
-    <Property Type="Int32" Name="IdContaCredito" Nullable="false" />
-    <Property Type="String" Name="CodigoContaCredito" Nullable="true" MaxLength="16" />
-    <Property Type="String" Name="Historico" Nullable="false" MaxLength="60" />
-    <Property Type="String" Name="DataLançamento" Nullable="true" MaxLength="10" />
+  <ComplexType Name="sp_PlanosDeContasListarTodosPlanosDaEmpresa_Result">
+    <Property Name="Id" Nullable="false" Type="Int32" />
+    <Property Name="MesDoPlano" Nullable="true" Type="String" MaxLength="10" />
   </ComplexType>
-  <ComplexType Name="sp_LancamentoBuscar_Result">
+  <ComplexType Name="sp_ContaBuscar_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+    <Property Type="String" Name="Codigo" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Nome" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="AtivoContaSintetica" Nullable="false" />
+    <Property Type="Boolean" Name="AtivoContaAnalitica" Nullable="false" />
+    <Property Type="Boolean" Name="PassivoContaSintetica" Nullable="false" />
+    <Property Type="Boolean" Name="PassivoContaAnalitica" Nullable="false" />
+    <Property Type="Boolean" Name="ReceitaContaSintetica" Nullable="false" />
+    <Property Type="Boolean" Name="ReceitaContaAnalitica" Nullable="false" />
+    <Property Type="Boolean" Name="DespesaContaSintetica" Nullable="false" />
+    <Property Type="Boolean" Name="DespesaContaAnalitica" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_PlanoDeContasListarContasDoPlano_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Codigo" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Nome" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Classificacao" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="IdConta" Nullable="false" />
-    <Property Type="String" Name="Data" Nullable="true" MaxLength="10" />
-    <Property Type="Decimal" Name="Valor" Nullable="false" Precision="19" />
-    <Property Type="Int32" Name="IdContaDebito" Nullable="false" />
-    <Property Type="Int32" Name="IdContaCredito" Nullable="false" />
-    <Property Type="String" Name="Historico" Nullable="false" MaxLength="60" />
-    <Property Type="String" Name="Codigo" Nullable="false" MaxLength="16" />
-    <Property Type="String" Name="Nome" Nullable="false" MaxLength="40" />
-    <Property Type="String" Name="Classificacao" Nullable="false" MaxLength="25" />
-    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="sp_PlanoDeContasListarContasForaDoPlano_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nome" Nullable="false" MaxLength="100" />
   </ComplexType>
 </Schema>
